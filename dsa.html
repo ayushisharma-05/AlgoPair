@@ -6,96 +6,203 @@
   <title>DSA Sheets - AlgoPair</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Base styles for light mode */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #fff;
-      color: #333;
+      background-color: #f2f6fb;
+      color: #1e293b;
       transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+      overflow-x: hidden;
     }
-  
+
+    /* Background doodles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image: 
+        /* Calculator */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='2' width='16' height='20' rx='2' ry='2'/%3E%3Cline x1='8' y1='6' x2='16' y2='6'/%3E%3C/svg%3E"),
+        /* Book */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3C/svg%3E"),
+        /* Code */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='55' height='55' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E"),
+        /* Pencil */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='45' height='45' viewBox='0 0 24 24' fill='none' stroke='%23e74c3c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'/%3E%3C/svg%3E"),
+        /* Lightbulb */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='none' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='9' y1='18' x2='15' y2='18'/%3E%3Cline x1='10' y1='22' x2='14' y2='22'/%3E%3Cpath d='M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14'/%3E%3C/svg%3E"),
+        /* Ruler */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23ec4899' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 3L3 21'/%3E%3Cpath d='M21 21L3 3'/%3E%3Cpath d='M3 3h18v18H3z'/%3E%3C/svg%3E"),
+        /* Graph */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='45' height='45' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E"),
+        /* Clock */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+      background-position: 
+        5% 10%, 
+        80% 15%, 
+        10% 75%, 
+        75% 70%, 
+        45% 35%,
+        20% 45%,
+        65% 55%,
+        30% 25%;
+      background-repeat: no-repeat;
+      opacity: 0.25;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Floating doodles */
+    .doodle {
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.3;
+      animation: floatDoodle 15s infinite linear;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .doodle-1 {
+      top: 10%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .doodle-2 {
+      top: 20%;
+      right: 8%;
+      animation-delay: 2s;
+    }
+
+    .doodle-3 {
+      bottom: 15%;
+      left: 12%;
+      animation-delay: 4s;
+    }
+
+    .doodle-4 {
+      bottom: 25%;
+      right: 15%;
+      animation-delay: 6s;
+    }
+
+    .doodle-5 {
+      top: 50%;
+      left: 50%;
+      animation-delay: 8s;
+    }
+
+    .doodle-6 {
+      top: 30%;
+      left: 30%;
+      animation-delay: 3s;
+    }
+
+    .doodle-7 {
+      bottom: 40%;
+      right: 30%;
+      animation-delay: 5s;
+    }
+
+    .doodle-8 {
+      top: 70%;
+      left: 20%;
+      animation-delay: 7s;
+    }
+
+    .doodle-9 {
+      top: 15%;
+      right: 25%;
+      animation-delay: 1s;
+    }
+
+    .doodle-10 {
+      bottom: 10%;
+      right: 40%;
+      animation-delay: 9s;
+    }
+
+    @keyframes floatDoodle {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(10px, 15px) rotate(5deg);
+      }
+      50% {
+        transform: translate(5px, -10px) rotate(-5deg);
+      }
+      75% {
+        transform: translate(-10px, 5px) rotate(3deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #222;
-      padding: 1rem 2rem;
-      color: #fff;
+      background-color: #ffffff;
+      border-bottom: 1px solid #d1d5db;
     }
-  
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+
+    .nav-links a, .nav-links button {
+      color: #1e293b;
     }
-  
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-  
-    .nav-links li a, .nav-links button {
-      color: #fff;
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-  
-    .container {
-      padding: 30px;
-      max-width: 1000px;
-      margin: auto;
-    }
-  
-    .title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-  
+
+    /* Additional styles specific to DSA page */
     #searchInput {
-      padding: 0.6rem;
+      padding: 0.8rem;
       width: 100%;
       max-width: 400px;
       margin: 0 auto 20px;
       font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #bbb;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #1e293b;
       display: block;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
-  
+
     table {
       width: 100%;
       border-collapse: collapse;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: #ffffff;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
-  
+
     th, td {
       padding: 14px 18px;
       text-align: left;
+      border-bottom: 1px solid #d1d5db;
+      transition: all 0.3s ease;
     }
-  
+
     th {
-      background-color: #4a90e2;
+      background-color: #3b82f6;
       color: white;
       font-weight: 600;
       text-transform: uppercase;
       font-size: 0.95rem;
     }
-  
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-  
+
     tr:hover {
-      background-color: #f1f1f1;
+      background-color: rgba(59, 130, 246, 0.1);
     }
-  
-    /* Colorful topic badges */
+
     .badge {
       padding: 4px 10px;
       border-radius: 20px;
@@ -104,66 +211,147 @@
       display: inline-block;
       font-weight: 600;
     }
-  
-    .linkedlist { background-color: #f39c12; }
-    .tree { background-color: #27ae60; }
+
+    .linkedlist { background-color: #8b5cf6; }
+    .tree { background-color: #22c55e; }
     .dp { background-color: #9b59b6; }
     .graph { background-color: #e74c3c; }
-  
+
     td:first-child {
-      color: #4a90e2;
+      color: #3b82f6;
       font-weight: bold;
     }
-  
+
     a {
-      color: #e67e22;
-      font-weight: bold;
+      color: #3b82f6;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
-  
+
     a:hover {
       text-decoration: underline;
     }
-  
-    /* Dark mode */
+
+    .title {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Dark mode specific styles */
     body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
+      background-color: #0f172a;
+      color: #ffffff;
     }
-  
+
+    body.dark-mode::before {
+      opacity: 0.2;
+    }
+
     body.dark-mode .navbar {
-      background-color: #1e1e1e;
+      background-color: #1e293b;
+      border-bottom: 1px solid #334155;
     }
-  
-    body.dark-mode table {
-      color: #ddd;
+
+    body.dark-mode .nav-links a,
+    body.dark-mode .nav-links button {
+      color: #ffffff;
     }
-  
-    body.dark-mode th {
-      background-color: #333;
-    }
-  
-    body.dark-mode tr:nth-child(even) {
-      background-color: #1e1e1e;
-    }
-  
-    body.dark-mode tr:hover {
-      background-color: #333;
-    }
-  
-    body.dark-mode a {
-      color: #ffa726;
-    }
-  
+
     body.dark-mode #searchInput {
-      background-color: #1e1e1e;
-      color: #eee;
-      border: 1px solid #444;
+      background: #1e293b;
+      border-color: #334155;
+      color: #ffffff;
+    }
+
+    body.dark-mode table {
+      background: #1e293b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    body.dark-mode th {
+      background-color: #3b82f6;
+    }
+
+    body.dark-mode td {
+      border-color: #334155;
+      color: #ffffff;
+    }
+
+    body.dark-mode tr:hover {
+      background-color: rgba(59, 130, 246, 0.15);
     }
   </style>
-  
 </head>
 <body>
+  <!-- Floating doodles -->
+  <div class="doodle doodle-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="16"></line>
+      <line x1="8" y1="12" x2="16" y2="12"></line>
+    </svg>
+  </div>
+  <div class="doodle doodle-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+      <path d="M2 17l10 5 10-5"></path>
+      <path d="M2 12l10 5 10-5"></path>
+    </svg>
+  </div>
+  <div class="doodle doodle-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="3" y1="9" x2="21" y2="9"></line>
+      <line x1="9" y1="21" x2="9" y2="9"></line>
+    </svg>
+  </div>
+  <div class="doodle doodle-4">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 18l6-6-6-6"></path>
+      <path d="M8 6l-6 6 6 6"></path>
+    </svg>
+  </div>
+  <div class="doodle doodle-5">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    </svg>
+  </div>
+  <div class="doodle doodle-6">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v20"></path>
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      <path d="M12 2l-5 5 5 5"></path>
+    </svg>
+  </div>
+  <div class="doodle doodle-7">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </div>
+  <div class="doodle doodle-8">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+    </svg>
+  </div>
+  <div class="doodle doodle-9">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+  </div>
+  <div class="doodle doodle-10">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20h9"></path>
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+    </svg>
+  </div>
+
   <nav class="navbar">
     <div class="logo">AlgoPair</div>
     <ul class="nav-links">
@@ -178,7 +366,7 @@
   <main class="container">
     <h1 class="title">DSA Sheet</h1>
   
-    <input type="text" id="searchInput" placeholder="Search for problems..." style="padding: 0.6rem; width: 100%; max-width: 400px; margin-bottom: 20px; font-size: 1rem; border-radius: 6px; border: 1px solid #ccc;">
+    <input type="text" id="searchInput" placeholder="Search for problems...">
   
     <table id="dsaTable">
       <thead>

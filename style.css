@@ -1,181 +1,220 @@
 :root {
-  --bg: #0f172a;
-  --text: #ffffff;
-  --card-bg: #1e293b;
-  --blue: #3b82f6;
-  --purple: #8b5cf6;
-  --green: #22c55e;
-
-  --light-bg: #f2f6fb;
-  --light-text: #1e293b;
-  --light-card: #ffffff;
-  --light-border: #d1d5db;
-}
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--card-bg);
-  padding: 1rem 2rem;
-  transition: background 0.3s;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--blue);
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links a {
-  color: #ddd;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
-.nav-links button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #ddd;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-.title {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-.blue {
-  color: var(--blue);
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.card {
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 12px;
-  width: 260px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: transform 0.2s, background 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card.full {
-  width: 100%;
-  max-width: 560px;
-}
-
-.card h2 {
-  margin-top: 0;
-}
-
-.card p {
-  font-size: 0.95rem;
-  margin: 0.5rem 0 1rem;
-}
-
-.btn {
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-}
-
-.btn.blue {
-  background-color: var(--blue);
-}
-
-.btn.purple {
-  background-color: var(--purple);
-}
-
-.btn.green {
-  background-color: var(--green);
-}
-
-body.light {
-  --bg: var(--light-bg);
-  --text: var(--light-text);
-  --card-bg: var(--light-card);
-}
-
-body.light .nav-links a,
-body.light .nav-links button {
-  color: var(--light-text);
-}
-
-body.light .navbar {
-  background: #ffffff;
-  border-bottom: 1px solid var(--light-border);
-}
-
-body.light .card {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-}
-.form-container {
-  max-width: 400px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  text-align: center;
-}
-
-.form-container h2 {
-  margin-bottom: 1.5rem;
-  color: var(--blue);
-}
-
-.form-box {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form-box input {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-}
+    --bg: #0f172a;
+    --text: #ffffff;
+    --card-bg: #1e293b;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --green: #22c55e;
+  
+    --light-bg: #f2f6fb;
+    --light-text: #1e293b;
+    --light-card: #ffffff;
+    --light-border: #d1d5db;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 1rem 2rem;
+    transition: background 0.3s;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--blue);
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .nav-links button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #ddd;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .blue {
+    color: var(--blue);
+  }
+  
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 260px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card.full {
+    width: 100%;
+    max-width: 560px;
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .btn.blue {
+    background-color: var(--blue);
+  }
+  
+  .btn.purple {
+    background-color: var(--purple);
+  }
+  
+  .btn.green {
+    background-color: var(--green);
+  }
+  
+  body.light {
+    --bg: var(--light-bg);
+    --text: var(--light-text);
+    --card-bg: var(--light-card);
+  }
+  
+  body.light .nav-links a,
+  body.light .nav-links button {
+    color: var(--light-text);
+  }
+  
+  body.light .navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--light-border);
+  }
+  
+  body.light .card {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  }
+  .form-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
+  }
+  
+  .form-container h2 {
+    margin-bottom: 1.5rem;
+    color: var(--blue);
+  }
+  
+  .form-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-box input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+  /* Dark Mode Styles */
+body.dark-mode {
+    --bg: #121212;
+    --text: #ffffff;
+    --card-bg: #1e1e1e;
+    --light-border: #444;
+  }
+  
+  body.dark-mode .navbar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--light-border);
+  }
+  
+  body.dark-mode .nav-links a,
+  body.dark-mode .nav-links button {
+    color: #ccc;
+  }
+  
+  body.dark-mode .card {
+    background: var(--card-bg);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  
+  body.dark-mode table {
+    background: var(--card-bg);
+    color: var(--text);
+  }
+  
+  body.dark-mode th,
+  body.dark-mode td {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-color: #555;
+  }
+  
+  body.dark-mode a {
+    color: #8ab4f8;
+  }
+  

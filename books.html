@@ -96,38 +96,34 @@
   </div>
 
   <script>
-    const books = [
-      { id: 18, title: "JavaScript", author: "Eloquent", img: "https://covers.openlibrary.org/b/id/8257896-L.jpg" },
-      { id: 19, title: "Data Structure And Algorithm", author: "Armstrong Subero", img: "https://covers.openlibrary.org/b/id/8306662-L.jpg" },
-      { id: 20, title: "Data Structure (Python)", author: "Oswald Campesato", img: "https://covers.openlibrary.org/b/id/8091016-L.jpg" },
-      { id: 21, title: "Data Structure (Java) 6th Edition", author: "Michael T. Goodrich", img: "https://covers.openlibrary.org/b/id/11125163-L.jpg" },
-      { id: 22, title: "Data Structure (C++)", author: "Pabitra Banerjee", img: "https://covers.openlibrary.org/b/id/8231854-L.jpg" },
-      { id: 23, title: "Fundamentals of Analytics Engg.", author: "Juan Venegas", img: "https://covers.openlibrary.org/b/id/8228691-L.jpg" },
-      { id: 24, title: "Let Us Java (6th Edition)", author: "Yashavant Kanetkar", img: "https://covers.openlibrary.org/b/id/8128692-L.jpg" },
-      { id: 25, title: "Let Us C", author: "Yashavant Kanetkar", img: "https://covers.openlibrary.org/b/id/8228691-L.jpg" },
-      { id: 26, title: "Python Crash Course 3rd Edition", author: "Eric Matthes", img: "https://covers.openlibrary.org/b/id/10563291-L.jpg" },
-      { id: 27, title: "Clean Code", author: "Robert C Martin", img: "https://covers.openlibrary.org/b/id/9644346-L.jpg" }
-    ];
+   const books = [
+  { id: 18, title: "JavaScript", author: "Eloquent", img: "books/1.jpeg", pdf: "books/Eloquent_JavaScript_4th_Edition_-_Marijn_Haverbeke.pdf" },
+  { id: 19, title: "Data Structure And Algorithm", author: "Armstrong Subero", img: "books/2.jpeg", pdf: "books/Codeless_Data_Structures_and_Algorithms_-_Armstrong_Subero.pdf" },
+  { id: 20, title: "Data Structure (Python)", author: "Oswald Campesato", img: "books/3.jpeg", pdf: "books/Python_Data_Structures_Pocket_Primer_-_Oswald_Campesato.pdf" },
+  { id: 21, title: "Data Structure (Java) 6th Edition", author: "Michael T. Goodrich", img: "books/4.jpeg", pdf: "books/Data_Structures_and_Algorithms_in_Java_-_Michael_T_Goodrich.pdf" },
+  { id: 22, title: "Data Structure (C++)", author: "Pabitra Banerjee", img: "books/5.jpeg", pdf: "books/Ninja_Mastering_DSA_In_C_-_Pabitra_Banerjee.pdf" },
+  { id: 23, title: "Fundamentals of Analytics Engg.", author: "Juan Venegas", img: "books/6.jpeg", pdf: "books/Fundamentals_of_Analytics_Engineering_-_Dumky_De_Wilde.pdf" },
+  { id: 24, title: "Let Us Java (6th Edition)", author: "Yashavant Kanetkar", img: "books/7.jpeg", pdf: "books/Fundamentals_of_Analytics_Engineering_-Let_Us_Java_6th_Edition_-_Yashavant_Kanetkar.pdf" },
+  { id: 25, title: "Let Us C", author: "Yashavant Kanetkar", img: "books/8.jpeg", pdf: "books/Fundamentals_of_Analytics_Engineering_-_Dumky_De_Wilde.pdf" },
+  { id: 26, title: "Python Crash Course 3rd Edition", author: "Eric Matthes", img: "books/9.jpeg", pdf: "books/Python_Crash_Course_3rd_Edition_-_Eric_Matthes.pdf" },
+  { id: 27, title: "Clean Code", author: "Robert C Martin", img: "books/10.jpeg", pdf: "books/Clean_Code__A_Handbook_of_Agile_Software_C_-_Robert_C_Martin.pdf" }
+];
 
-    const booksContainer = document.getElementById('booksContainer');
-    const searchInput = document.getElementById('searchInput');
-
-    function renderBooks(filteredBooks) {
-      booksContainer.innerHTML = "";
-      filteredBooks.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "book-card";
-        card.innerHTML = `
-          <a href="book.html?id=${book.id}">
-            <img src="${book.img}" alt="${book.title}" />
-            <div class="book-title">${book.title}</div>
-            <div class="book-author">${book.author}</div>
-          </a>
-        `;
-        booksContainer.appendChild(card);
-      });
-    }
-
+function renderBooks(filteredBooks) {
+  booksContainer.innerHTML = "";
+  filteredBooks.forEach(book => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+      <a href="${book.pdf}" target="_blank">
+        <img src="${book.img}" alt="${book.title}" />
+        <div class="book-title">${book.title}</div>
+        <div class="book-author">${book.author}</div>
+      </a>
+    `;
+    booksContainer.appendChild(card);
+  });
+}
     renderBooks(books);
 
     searchInput.addEventListener("input", () => {

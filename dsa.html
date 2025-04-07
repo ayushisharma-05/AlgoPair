@@ -1,24 +1,262 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DSA Sheets - AlgoPair</title>
   <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #ffffff;
+      --card-bg: #1e293b;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --green: #22c55e;
+      --light-bg: #f2f6fb;
+      --light-text: #1e293b;
+      --light-card: #ffffff;
+      --light-border: #d1d5db;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--card-bg);
+      padding: 1rem 2rem;
+      color: var(--text);
+      transition: background-color 0.3s ease;
+    }
+  
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--blue);
+    }
+  
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+  
+    .nav-links li a, .nav-links button {
+      color: var(--text);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+  
+    .container {
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+  
+    .title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--text);
+      transition: color 0.3s ease;
+    }
+  
+    #searchInput {
+      padding: 0.6rem;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--light-border);
+      background-color: var(--card-bg);
+      color: var(--text);
+      display: block;
+      transition: all 0.3s ease;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      background-color: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+  
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--light-border);
+      transition: all 0.3s ease;
+    }
+  
+    th {
+      background-color: var(--card-bg);
+      color: var(--text);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+  
+    tr:nth-child(even) {
+      background-color: var(--card-bg);
+    }
+  
+    tr:hover {
+      background-color: var(--bg);
+    }
+  
+    /* Colorful topic badges */
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      color: var(--text);
+      font-size: 0.85rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+  
+    .linkedlist { background-color: var(--purple); }
+    .tree { background-color: var(--green); }
+    .dp { background-color: var(--blue); }
+    .graph { background-color: #e74c3c; }
+  
+    td:first-child {
+      color: var(--blue);
+      font-weight: bold;
+    }
+  
+    a {
+      color: var(--blue);
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+  
+    a:hover {
+      text-decoration: underline;
+    }
+  
+    /* Light mode styles */
+    body.light {
+      background-color: var(--light-bg);
+      color: var(--light-text);
+    }
+  
+    body.light .navbar {
+      background-color: var(--light-card);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    body.light .nav-links li a, 
+    body.light .nav-links button {
+      color: var(--light-text);
+    }
+  
+    body.light .title {
+      color: var(--light-text);
+    }
+  
+    body.light #searchInput {
+      background-color: var(--light-card);
+      color: var(--light-text);
+      border-color: var(--light-border);
+    }
+  
+    body.light table {
+      background-color: var(--light-card);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    body.light th {
+      background-color: var(--light-card);
+      color: var(--light-text);
+    }
+  
+    body.light tr:nth-child(even) {
+      background-color: var(--light-card);
+    }
+  
+    body.light tr:hover {
+      background-color: var(--light-bg);
+    }
+  
+    body.light a {
+      color: var(--blue);
+    }
+  
+    body.light a:hover {
+      color: var(--blue);
+    }
+  
+    /* Dark mode toggle button */
+    .dark-mode-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+  
+    .dark-mode-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  
+    body.light .dark-mode-toggle:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  
 </head>
 <body>
   <nav class="navbar">
     <div class="logo">AlgoPair</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="signin.html">Sign In</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><button id="darkModeToggle" class="dark-mode-toggle">🌙</button></li>
     </ul>
   </nav>
 
-  <section class="hero">
-    <h1>DSA Sheet Resources</h1>
-    <ul class="book-list">
-      <li><a href="#">🔗 Striver's SDE Sheet (PDF)</a></li>
-      <li><a href="#">🔗 Love Babbar DSA Sheet</a></li>
-      <li><a href="#">🔗 450 Questions Sheet</a></li>
-    </ul>
-  </section>
+  <main class="container">
+    <h1 class="title">DSA Sheet</h1>
+  
+    <input type="text" id="searchInput" placeholder="Search for problems...">
+  
+    <table id="dsaTable">
+      <thead>
+        <tr>
+          <th>Problem No</th>
+          <th>Topic</th>
+          <th>Problem</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Rows will be added using JavaScript -->
+      </tbody>
+    </table>
+  </main>
+  
+  <script src="script.js"></script>
 </body>
 </html>

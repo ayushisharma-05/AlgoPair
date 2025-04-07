@@ -5,6 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AlgoPair</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: fit-content;
+      min-width: 200px;
+    }
+
+    .btn-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0.9;
+    }
+
+    .btn-link.blue {
+      background-color: var(--blue);
+      color: white;
+    }
+
+    .btn-link.purple {
+      background-color: var(--purple);
+      color: white;
+    }
+
+    .btn-link.green {
+      background-color: var(--green);
+      color: white;
+    }
+
+    .card h2 {
+      margin-bottom: 1rem;
+      color: var(--text);
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      color: var(--text);
+      opacity: 0.8;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      max-width: 300px;
+    }
+
+    .btn-link span:first-child {
+      margin-right: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card.full {
+      grid-column: 1 / -1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card.full p {
+      max-width: 500px;
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .card {
+        padding: 1.25rem;
+      }
+
+      .btn-link {
+        min-width: 180px;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -24,7 +125,10 @@
       <div class="card">
         <h2>Connect with Friend</h2>
         <p>Generate a private room and collaborate with a friend.</p>
-        <button class="btn blue">Generate Invite Link</button>
+        <a href="connect.html?type=friend" class="btn-link blue">
+          <span>Generate Invite Link</span>
+          <span>🔗</span>
+        </a>
       </div>
       <div class="card">
         <h2>Connect with a Stranger</h2>
@@ -34,11 +138,15 @@
       <div class="card full">
         <h2>Practice DSA Sheets</h2>
         <p>Browse and download curated DSA question sets from basic to advanced level.</p>
-        <button class="btn green">Explore DSA Sheets</button>
+        <a href="dsa.html" class="btn-link green">
+          <span>Explore DSA Sheets</span>
+          <span>📚</span>
+        </a>
       </div>
     </div>
   </main>
 
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

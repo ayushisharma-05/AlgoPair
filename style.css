@@ -151,6 +151,7 @@ body.light .navbar {
 body.light .card {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
+
 .form-container {
   max-width: 400px;
   margin: 4rem auto;
@@ -178,4 +179,151 @@ body.light .card {
   border-radius: 6px;
   border: none;
   outline: none;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  --bg: #121212;
+  --text: #ffffff;
+  --card-bg: #1e1e1e;
+  --light-border: #444;
+}
+
+body.dark-mode .navbar {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--light-border);
+}
+
+body.dark-mode .nav-links a,
+body.dark-mode .nav-links button {
+  color: #ccc;
+}
+
+body.dark-mode .card {
+  background: var(--card-bg);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode table {
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+body.dark-mode th,
+body.dark-mode td {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #555;
+}
+
+body.dark-mode a {
+  color: #8ab4f8;
+}
+
+/* Room Code Modal */
+.room-code-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.room-code-modal .modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.room-code-modal h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.room-code-modal h3 {
+    font-size: 2rem;
+    color: #007bff;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.room-code-modal button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.room-code-modal button:hover {
+    background-color: #0056b3;
+}
+
+/* Waiting Modal */
+.waiting-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.waiting-modal .modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.waiting-modal h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    margin: 1rem auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.waiting-modal button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.waiting-modal button:hover {
+    background-color: #c82333;
 }

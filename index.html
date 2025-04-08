@@ -1,152 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AlgoPair</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Collaborative Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .btn-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      width: fit-content;
-      min-width: 200px;
-    }
+        body {
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background: #0a192f;
+            color: #64ffda;
+        }
 
-    .btn-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      opacity: 0.9;
-    }
+        .join-room-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
-    .btn-link.blue {
-      background-color: var(--blue);
-      color: white;
-    }
+        .join-form {
+            background: #112240;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
+            width: 400px;
+        }
 
-    .btn-link.purple {
-      background-color: var(--purple);
-      color: white;
-    }
+        .join-form h2 {
+            color: #64ffda;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
 
-    .btn-link.green {
-      background-color: var(--green);
-      color: white;
-    }
+        .input-group {
+            margin-bottom: 1rem;
+        }
 
-    .card h2 {
-      margin-bottom: 1rem;
-      color: var(--text);
-      font-size: 1.5rem;
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #8892b0;
+        }
 
-    .card p {
-      color: var(--text);
-      opacity: 0.8;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
-      max-width: 300px;
-    }
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background: #0a192f;
+            border: 1px solid #64ffda;
+            border-radius: 4px;
+            color: #64ffda;
+            font-family: 'Courier New', monospace;
+        }
 
-    .btn-link span:first-child {
-      margin-right: 8px;
-    }
+        .join-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #64ffda;
+            color: #0a192f;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .join-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
 
-    .card.full {
-      grid-column: 1 / -1;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #112240;
+            padding: 20px;
+            gap: 20px;
+        }
 
-    .card.full p {
-      max-width: 500px;
-    }
+        .video-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    @media (max-width: 768px) {
-      .cards {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
-      
-      .card {
-        padding: 1.25rem;
-      }
+        .video-box {
+            background: #0a192f;
+            border-radius: 8px;
+            overflow: hidden;
+            flex: 1;
+            position: relative;
+            border: 1px solid #64ffda;
+        }
 
-      .btn-link {
-        min-width: 180px;
-      }
-    }
-  </style>
+        .video-box .user-name {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(10, 25, 47, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #64ffda;
+            font-family: 'Courier New', monospace;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #64ffda;
+            color: #0a192f;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        button.off {
+            background: #f44336;
+        }
+
+        .right-panel {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: flex;
+            background: #112240;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: #0a192f;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #64ffda;
+            border: 1px solid #64ffda;
+        }
+
+        .tab.active {
+            background: #64ffda;
+            color: #0a192f;
+        }
+
+        .editor-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+        }
+
+        .dsa-sheet {
+            width: 300px;
+            background: #112240;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #64ffda;
+        }
+
+        .dsa-sheet h3 {
+            margin-bottom: 10px;
+            color: #64ffda;
+        }
+
+        .dsa-sheet ul {
+            list-style: none;
+        }
+
+        .dsa-sheet li {
+            padding: 8px;
+            margin: 5px 0;
+            background: #0a192f;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #8892b0;
+            border: 1px solid #64ffda;
+            transition: all 0.3s;
+        }
+
+        .dsa-sheet li:hover {
+            background: #64ffda;
+            color: #0a192f;
+            transform: translateX(5px);
+        }
+
+        .CodeMirror {
+            flex: 1;
+            height: 100% !important;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-container {
+            height: 200px;
+            background: #112240;
+            color: #64ffda;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            border-top: 1px solid #64ffda;
+        }
+
+        .chat-container {
+            height: 200px;
+            background: #112240;
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #64ffda;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-input {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #64ffda;
+            border-radius: 4px;
+            background: #0a192f;
+            color: #64ffda;
+            font-family: 'Courier New', monospace;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #0a192f;
+            border-radius: 4px;
+            border: 1px solid #64ffda;
+        }
+
+        .message .sender {
+            color: #64ffda;
+            font-weight: bold;
+        }
+
+        .message .time {
+            font-size: 0.8em;
+            color: #8892b0;
+        }
+
+        .room-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #112240;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #64ffda;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #64ffda;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">AlgoPair</div>
-    <ul class="nav-links">
-      <li><a href="books.html">Books</a></li>
-      <li><a href="signin.html">Sign In</a></li>
-      <li><a href="signup.html">Sign Up</a></li>
-      <li><button id="darkModeToggle">🌙</button></li>
-    </ul>
-  </nav>
-
-  <main class="container">
-    <h1 class="title">Welcome to <span class="blue">AlgoPair</span></h1>
-
-    <div class="cards">
-      <div class="card">
-        <h2>Connect with Friend</h2>
-        <p>Generate a private room and collaborate with a friend.</p>
-        <a href="connect.html?type=friend" class="btn-link blue">
-          <span>Generate Invite Link</span>
-          <span>🔗</span>
-        </a>
-      </div>
-      <div class="card">
-        <h2>Connect with a Stranger</h2>
-        <p>Match with a random peer and solve DSA problems together.</p>
-        <button class="btn purple">Join Random Room</button>
-      </div>
-      <div class="card full">
-        <h2>Practice DSA Sheets</h2>
-        <p>Browse and download curated DSA question sets from basic to advanced level.</p>
-        <a href="dsa.html" class="btn-link green">
-          <span>Explore DSA Sheets</span>
-          <span>📚</span>
-        </a>
-      </div>
+    <div class="join-room-container" id="joinRoomContainer">
+        <div class="join-form">
+            <h2>Join DSA Collaboration Room</h2>
+            <div class="input-group">
+                <label for="roomId">Room ID</label>
+                <input type="text" id="roomId" placeholder="Enter Room ID">
+            </div>
+            <div class="input-group">
+                <label for="userName">Your Name</label>
+                <input type="text" id="userName" placeholder="Enter Your Name">
+            </div>
+            <button class="join-button" id="joinButton">Join Room</button>
+        </div>
     </div>
-  </main>
 
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-  <script src="script.js"></script>
+    <div class="left-panel">
+        <div class="video-container">
+            <div class="video-box">
+                <video id="localVideo" autoplay muted></video>
+                <div class="user-name" id="localUserName">You</div>
+            </div>
+            <div class="video-box">
+                <video id="remoteVideo" autoplay></video>
+                <div class="user-name" id="remoteUserName">Partner</div>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="startButton"><i class="fas fa-video"></i> Start Video</button>
+            <button id="callButton"><i class="fas fa-phone"></i> Start Call</button>
+            <button id="hangupButton"><i class="fas fa-phone-slash"></i> Hang Up</button>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="room-info" id="roomInfo">Room: <span id="currentRoom">Not Joined</span></div>
+        <div class="tabs">
+            <div class="tab active" data-tab="editor">Code Editor</div>
+            <div class="tab" data-tab="dsa">DSA Sheet</div>
+        </div>
+        <div class="editor-container">
+            <div class="dsa-sheet" id="dsaSheet">
+                <h3>DSA Problems</h3>
+                <ul>
+                    <li data-problem="twoSum">Two Sum</li>
+                    <li data-problem="reverseString">Reverse String</li>
+                    <li data-problem="palindrome">Palindrome Check</li>
+                    <li data-problem="fibonacci">Fibonacci Series</li>
+                    <li data-problem="binarySearch">Binary Search</li>
+                    <li data-problem="bubbleSort">Bubble Sort</li>
+                    <li data-problem="mergeSort">Merge Sort</li>
+                    <li data-problem="quickSort">Quick Sort</li>
+                </ul>
+            </div>
+            <textarea id="editor"></textarea>
+        </div>
+        <div class="output-container" id="output"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="app.js"></script>
 </body>
-</html>
+</html> 
